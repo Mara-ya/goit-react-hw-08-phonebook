@@ -2,6 +2,10 @@
     display: flex;
     justify-content: center;
     padding: 10px;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+
     
     & button:hover[type="submit"] {
         border-color: #8b4342;

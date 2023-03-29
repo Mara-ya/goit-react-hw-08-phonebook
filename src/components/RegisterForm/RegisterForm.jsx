@@ -1,11 +1,23 @@
-import { ButtonSt } from 'components/AdditionalStyles/ButtonLogIn.styled';
-import { PasswordInput } from 'components/AdditionalStyles/PasswordInput.styled';
+import {useState} from 'react';
 import { useDispatch } from 'react-redux';
+import { 
+  Box, 
+  FormControl, 
+  TextField, 
+  InputLabel,
+  Input,
+  InputAdornment,
+  IconButton,
+  Button,
+} from '@mui/material';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { register } from 'redux/auth/operations';
-import {Input} from '../AdditionalStyles/InputLogIn.styled';
-import { Button, Label, Wrapper } from './RegisterForm.styled';
+import styled from "./RegisterForm.module.scss";
+
 
 export const RegisterForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
 
   const handleSubmit = e => {
@@ -21,25 +33,77 @@ export const RegisterForm = () => {
     form.reset();
   };
 
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
   return (
-    <Wrapper>
+    <Box className={styled.wrapper}>
       <form onSubmit={handleSubmit} autoComplete="off">
-        <Label>
-          Username
-          <Input type="text" name="name" />
-        </Label>
-        <Label>
-          Email
-          <Input type="email" name="email" />
-        </Label>
-        <Label>
-          Password
-          <PasswordInput type="password" name="password" />
-        </Label>
-        <Button>
-        <ButtonSt type="submit">Register</ButtonSt>
-        </Button>
+        <FormControl 
+          className={styled.formControl}
+        >
+          <TextField 
+            type="text" 
+            name="name" 
+            label="Name" 
+            variant="standard" 
+            className={styled.formControl__input}
+            required 
+          />
+          <TextField 
+            type="email" 
+            name="email" 
+            label="Email" 
+            variant="standard" 
+            className={styled.formControl__input}
+            required
+          />
+        </FormControl>
+        <FormControl 
+          className={styled.formControl}
+        >
+          <InputLabel 
+            htmlFor='password' 
+            sx={{top:'5px', left:'-13px'}}
+          >
+            Password *
+          </InputLabel>
+          <Input
+            id="password"
+            name="password"
+            label="password"
+            required
+            inputProps={{
+              minLength: 8,
+            }}
+            className={styled.formControl__input}
+            type={showPassword ? 'text' : 'password'}
+            endAdornment={
+              <InputAdornment position="end" sx={{left: '50px'}}>
+                <IconButton
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+        </FormControl>
+        <Box sx={{display: 'flex', justifyContent: 'center', p: 2}}>
+          <Button 
+            type="submit" 
+            variant="outlined"
+            sx={{color: "#428A8B", borderColor: "#428A8B"}}
+          >
+            Register
+          </Button>
+        </Box>
       </form>
-    </Wrapper>
+    </Box>
   );
 };

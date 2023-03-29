@@ -3,9 +3,9 @@ export const theme = {
         black: '#000',
         white: '#fff',
         text: '#2a2a2a',
-        background: '#fff',
+        background: '#e0e0e0',
         accent: '#428A8B',
-        hover: '#8C5534'
+        hover: '#9f5300'
     },
     space: [0, 2, 4, 8, 16, 32, 64, 128, 256],
     fonts: {

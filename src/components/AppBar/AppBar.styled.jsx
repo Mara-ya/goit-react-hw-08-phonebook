@@ -11,9 +11,9 @@ export const Wrapper = styled.header`
   width: 100%;
   padding: ${p => theme.space[3]}px ${p => theme.space[4]}px;
   background-color: ${p => theme.colors.accent};
-  `
+`
 
 export const ForUser = styled.div`
-    display: flex;
-    padding: ${p => theme.space[3]}px;
+  display: flex;
+  padding: ${p => theme.space[3]}px;
 `

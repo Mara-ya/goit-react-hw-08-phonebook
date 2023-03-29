@@ -1,11 +1,23 @@
-import { ButtonSt } from 'components/AdditionalStyles/ButtonLogIn.styled';
-import { Input } from 'components/AdditionalStyles/InputLogIn.styled';
-import { PasswordInput } from 'components/AdditionalStyles/PasswordInput.styled';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/auth/operations';
-import { Button, Label, Wrapper } from './LoginForm.styled';
+import { 
+  Box, 
+  FormControl, 
+  TextField, 
+  InputLabel,
+  Input,
+  InputAdornment,
+  IconButton,
+  Button,
+} from '@mui/material';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import styled from "./LoginForm.module.scss";
+
 
 export const LoginForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
 
   const handleSubmit = e => {
@@ -20,19 +32,64 @@ export const LoginForm = () => {
     form.reset();
   };
 
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
   return (
-    <Wrapper>
+    <Box className={styled.wrapper}>
       <form onSubmit={handleSubmit} autoComplete="off">
-        <Label>
-          Email
-          <Input type="email" name="email" />
-        </Label>
-        <Label>
-          Password
-          <PasswordInput type="password" name="password" />
-        </Label>
-        <Button><ButtonSt type="submit">Log In</ButtonSt></Button>
+          <TextField 
+            type="email" 
+            name="email" 
+            label="Email" 
+            variant="standard" 
+            className={styled.formControl__input}
+            required
+          />
+        <FormControl 
+          className={styled.formControl}
+        >
+          <InputLabel 
+            htmlFor='password' 
+            sx={{top:'5px', left:'-13px'}}
+          >
+            Password *
+          </InputLabel>
+          <Input
+            name="password"
+            label="password"
+            required
+            inputProps={{
+              minLength: 8,
+            }}
+            className={styled.formControl__input}
+            type={showPassword ? 'text' : 'password'}
+            endAdornment={
+              <InputAdornment position="end" sx={{left: '50px'}}>
+                <IconButton
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+        </FormControl>
+        <Box sx={{display: 'flex', justifyContent: 'center', p: 2}}>
+          <Button 
+            type="submit" 
+            variant="outlined"
+            sx={{color: "#428A8B", borderColor: "#428A8B"}}
+          >
+            LogIn
+          </Button>
+        </Box>
       </form>
-    </Wrapper>
+    </Box>
   );
 };

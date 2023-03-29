@@ -14,6 +14,6 @@ export const NavLinkSt = styled(NavLink)`
         margin-right: ${p => theme.space[4]}px;
     }
     &:hover{
-        color: ${p => theme.colors.hover};
+        text-shadow: 0 0 5px #8b4342;
     }
 `

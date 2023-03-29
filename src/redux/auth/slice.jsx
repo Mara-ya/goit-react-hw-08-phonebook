@@ -9,7 +9,7 @@ const authSlice = createSlice({
     isLoggedIn: false,
     isRefreshing: false,
   },
-  extraReducers: builder =>
+  extraReducers: (builder) => {
     builder
       .addCase(register.pending, (state, action) => state)
       .addCase(register.fulfilled, (state, action) => {
@@ -31,7 +31,8 @@ const authSlice = createSlice({
       .addCase(refreshUser.fulfilled, (state, action) => {
         state.user = action.payload;
         state.isLoggedIn = true;
-      }),
+      })
+  }
 });
 
 export const authReducer = authSlice.reducer;

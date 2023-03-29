@@ -23,7 +23,6 @@ export const Button = styled.button`
     padding: ${p => theme.space[3]}px;
 
     &:hover{
-        background-color: ${p => theme.colors.hover};
-        color: ${p => theme.colors.black};
+        text-shadow: 0 0 5px #8b4342;
     }
 `

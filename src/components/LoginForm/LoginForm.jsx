@@ -41,6 +41,9 @@ export const LoginForm = () => {
   return (
     <Box className={styled.wrapper}>
       <form onSubmit={handleSubmit} autoComplete="off">
+        <FormControl 
+          className={styled.formControl}
+        >
           <TextField 
             type="email" 
             name="email" 
@@ -49,6 +52,7 @@ export const LoginForm = () => {
             className={styled.formControl__input}
             required
           />
+        </FormControl>
         <FormControl 
           className={styled.formControl}
         >
